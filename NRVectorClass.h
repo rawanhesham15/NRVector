@@ -86,4 +86,31 @@ public:
         }
         return sz;
     }
+
+    using iterator = T*;
+
+    iterator begin(){
+        return vec;
+    }
+
+    iterator end(){
+        return vec + sz;
+    }
+
+    void erase(iterator it){
+        bool flag = false;
+        for (int i = 0; i < sz; ++i) {
+            if(*(it) == vec[i]){
+                flag = true;
+                continue;
+            }
+            if(flag){
+                vec[i-1] = vec[i];
+            }
+            else{
+                vec[i] = vec[i];
+            }
+        }
+        sz--;
+    }
 };
