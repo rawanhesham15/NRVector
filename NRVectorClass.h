@@ -32,4 +32,32 @@ public:
     NRVector(int c = 0): capcity(c), sz(0){
         vec = new T[capcity];
     }
+
+    // Parameterized Constructor taking array and size of array:
+    NRVector (T* arr, int  n){
+        capcity = n*2;
+        sz = n;
+        vec = new T[n];
+        for(int i = 0; i < n; i++){
+            vec[i] = arr[i];
+        }
+    }
+
+    NRVector &operator= (const NRVector& v){
+        if(this != &v) {
+            capcity = 0;
+            sz = 0;
+            delete this->vec;
+            capcity = v.capcity;
+            sz = v.sz;
+            vec = new T[capcity];
+            for (int i = 0; i < sz; ++i) {
+                vec[i] = v.vec[i];
+            }
+        }
+        else{
+            cout << "Sorry, Can Not Delete My Self" << endl;
+        }
+        return *this;
+    }
 };
