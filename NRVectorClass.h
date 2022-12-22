@@ -60,4 +60,30 @@ public:
         }
         return *this;
     }
+
+    // [] Access Operator:
+    T& operator[](int index){
+        if(index < 0 || index >= sz){
+            throw out_of_range("Vector Index Out Of Bound");
+        }
+        return vec[index];
+    }
+
+    int push_back(T element){
+        if(sz < capcity){
+            vec[sz++] = element;
+        }
+        else{
+            T* newVec = new T[capcity * 2];
+            capcity *= 2;
+            for (int i = 0; i < sz; ++i) {
+                newVec[i] = vec[i];
+            }
+            delete[] vec;
+            vec = newVec;
+            newVec = nullptr;
+            vec[sz++] = element;
+        }
+        return sz;
+    }
 };
