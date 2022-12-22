@@ -43,6 +43,7 @@ public:
         }
     }
 
+    // Copy Assignment Operator:
     NRVector &operator= (const NRVector& v){
         if(this != &v) {
             capcity = 0;
@@ -69,6 +70,7 @@ public:
         return vec[index];
     }
 
+    // Push elements in Vector:
     int push_back(T element){
         if(sz < capcity){
             vec[sz++] = element;
@@ -87,6 +89,8 @@ public:
         return sz;
     }
 
+    //iterator begin() // Return an iterator (T*)
+    //iterator end() // Return an iterator (T*)
     using iterator = T*;
 
     iterator begin(){
@@ -97,6 +101,7 @@ public:
         return vec + sz;
     }
 
+    // Erase one element of the vector.
     void erase(iterator it){
         bool flag = false;
         for (int i = 0; i < sz; ++i) {
@@ -114,6 +119,7 @@ public:
         sz--;
     }
 
+    // Insert element in the vector.
     void insert(iterator it, T element){
         T* newVec = new T[capcity];
         if((sz+1) > capcity){
@@ -158,5 +164,25 @@ public:
             return false;
         }
     }
+
+    // Capacity operations
+    // Return current size of vec:
+    int size() const{
+        return sz;
+    }
+
+    // Relocate to bigger space:
+    int resize(){
+        T* newVec = new T[capcity * 2];
+        capcity *= 2;
+        for (int i = 0; i < sz; ++i) {
+            newVec[i] = vec[i];
+        }
+        delete[] vec;
+        vec = newVec;
+        newVec = nullptr;
+        return capcity;
+    }
+
 
 };
