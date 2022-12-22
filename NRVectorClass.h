@@ -113,4 +113,50 @@ public:
         }
         sz--;
     }
+
+    void insert(iterator it, T element){
+        T* newVec = new T[capcity];
+        if((sz+1) > capcity){
+            cout << "Sorry, the vector is full.\n";
+        }
+        else{
+            sz++;
+            int j = 0;
+            for (int i = 0; i < sz; ++i) {
+                if(it == &vec[j]){
+                    newVec[i] = element;
+                    j++;
+                }
+                else {
+                    if(j == 0){
+                        newVec[i] = vec[j];
+                        j++;
+                    }else {
+                        newVec[i] = vec[j - 1];
+                        j++;
+                    }
+                }
+            }
+            vec = newVec;
+            newVec = nullptr;
+        }
+    }
+
+    // Comparison operations:
+    //overloading the operator==
+    //Return true if all elements in both vectors are equal
+    bool operator==(const NRVector<T>& other){
+        if(sz == other.sz){
+            for(int i = 0; i < sz; i++){
+                if(vec[i] != other.vec[i]){
+                    return false;
+                }
+            }
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 };
